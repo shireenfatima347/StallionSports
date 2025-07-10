@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stallion Sports - Equestrian Equipment</title>
+    <!-- Removed the redundant <script src="cart.js"></script> as the JS is embedded below -->
+    <style>
+        #receipt {
+  max-width: 360px;
+  background: white;
+  padding: 20px;
+  margin: 20px auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  font-family: 'Segoe UI', sans-serif;
+  box-sizing: border-box;
+}
+
+#receipt h3 {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+#cart-items {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 15px;
+}
+
+#cart-items th,
+#cart-items td {
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+  font-size: 0.95em;
+}
+
+#cart-items th {
+  background-color: #f9f9f9;
+  font-weight: 600;
+  text-align: center;
+}
+
+#cart-items td:nth-child(2),
+#cart-items td:nth-child(3) {
+  text-align: center;
+  white-space: nowrap;
+}
+
+#cart-total {
+  font-size: 1.1em;
+  text-align: right;
+  padding: 10px;
+  background: #00178b;
+  color: white;
+  border-radius: 6px;
+}
+    
+
+
+
+
+
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: url('img/bg.jpg') no-repeat center/cover;
+        color: #333;
+        padding-top: 140px; /* Increased padding */
+        padding-bottom: 70px;
+    }
+    .navbar {
+        background: darkblue;
+        padding: 15px;
+        text-align: center;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000; /* Increased z-index */
+        height: 60px;
+    }
+    nav {
+        position: fixed;
+        top: 60px;
+        width: 100%;
+        background-color: #333;
+        padding: 10px;
+        text-align: center;
+        z-index: 1000;
+    }
+    .logo-container { 
+        display: flex; 
+        align-items: center; 
+        gap: 10px; 
+    }
+    .navbar img { 
+        height: 50px; 
+        width: 50px; 
+        border-radius: 50%; 
+    }
+    .company-name { 
+        color: white; 
+        font-size: 24px; 
+    }
+    .add-to-cart {
+    margin-top: 10px;
+    padding: 6px 10px;
+    background-color: #1e90ff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#cart-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+    .hero { 
+        text-align: center; 
+        padding: 100px 20px; 
+        background: url('https://source.unsplash.com/1600x900/?business,office') no-repeat center/cover; 
+        color: black; 
+    }
+    .hero h1 { 
+        font-size: 50px; 
+        color:darkblue;
+        margin: 0; 
+    }
+    .hero a { 
+        padding: 10px 20px; 
+        background: darkblue; 
+        color: white; 
+        text-decoration: none; 
+        border-radius: 5px; 
+    }
+    .hero a:hover { 
+        background: orangered; 
+    }
+    .section {        /*products and services*/
+        padding: 50px; 
+        text-align: center; 
+        background: #fff; 
+    }
+    .section h2 {
+        color: #00178b;
+    }    
+    .slider-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.slider {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    width: 100%;
+    padding: 10px 0;
+}
+.slider::-webkit-scrollbar { 
+        display: none; 
+    }
+    
+.box {
+  width: 250px;               /* ✅ Fixed width */
+  min-width: 250px;
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-shrink: 0;
+  background-color: #f4f4f4;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;     /* ✅ Prevent padding from adding to width */
+}
+.box p {
+  font-size: 14px;
+  white-space: normal;     /* Allow wrapping if needed */
+  word-wrap: break-word;
+  margin: 0;
+}
+
+
+
+.product-img {
+    width: 100%;
+    height: 150px;
+    object-fit: contain; /* 🟢 Scales image to fit inside without cropping */
+    border-bottom: 1px solid #ddd;
+    background-color: #fff; /* Optional: white background behind image */
+}
+
+
+
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.slider {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    width: 100%;
+    padding: 10px 0;
+}
+
+
+
+.slider-btn {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    z-index: 1;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 20px;
+    border-radius: 4px;
+}
+
+.slider-btn.left {
+    left: 0;
+}
+
+.slider-btn.right {
+    right: 0;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+
+    .project-list {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    .project-card {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow:0 4px 8px rgba(200, 200, 200, 0.5); 
+        padding: 20px;
+        width: 300px;
+        text-align: center;
+    }
+    .category-container {
+        margin: 20px;
+    }
+    .main-category {
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .main-category h5{
+        text-align:left;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+#receipt { /* Changed to relative */
+            width: 300px;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            margin: 20px auto; /* Center the cart */
+}
+
+#cart-items {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+#cart-items div {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  background: #f5f5f5;
+}
+
+#cart-total {
+  font-size: 1.2em;
+  text-align: right;
+  padding: 10px;
+  background: #00178b;
+  color: white;
+}
+
+    .contact {
+    text-align: center;
+    padding: 50px;
+    background: #fff;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    margin: 50px auto;
+    max-width: 600px;
+    border: 3px solid #00178b; /* ✅ Blue border */
+}
+.contact:hover {
+    transform: scale(1.01);
+    transition: all 0.3s ease;
+}
+
+        .contact h2 {
+        color: #00178b;
+    }    
+    .contact-section p {
+        font-size: 18px;
+        color: #555;
+        max-width: 900px;
+        margin: 0 auto;
+        line-height: 1.8;
+    }
+    .contact a {
+        font-size: 18px;
+        text-decoration: none;
+        color: black;
+    }
+    .contact form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+    .contact input, .contact textarea {
+        width: 90%;
+        padding: 10px;
+        border: 2px solid #00178b;
+        border-radius: 5px;
+        font-size: 16px;
+    }   
+    .contact button {
+        padding: 10px 20px;
+        background: darkblue;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    .contact button:hover {
+        background: darkblue;
+    }
+    .left { 
+        left: 0; 
+    }
+    .right { 
+        right: 0; 
+    }
+    nav {
+      background-color: #333;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .footer { 
+       position: fixed;
+    bottom: 0;
+    left: 0; /* Added to ensure it starts from the left */
+    right: 0; /* Added to ensure it ends at the right */
+    background: #333; 
+    color: white; 
+    text-align: center; 
+    padding: 15px;
+    }
+    body {
+        padding-bottom: 70px; /* To prevent content from being hidden behind fixed footer */
+        padding-top: 120px; /* To prevent content from being hidden behind fixed header */
+    }
+    .slider-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px;
+  gap: 20px;
+}
+
+.slider::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #222;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 1;
+  border-radius: 50%;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.slider-btn.left {
+  left: 5px;
+}
+
+.slider-btn.right {
+  right: 5px;
+}
+
+.slider-btn.hidden {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+    html {
+        scroll-behavior: smooth;
+    }
+    </style>
+</head>
+<body>
+    <header class="navbar" style="position: fixed; top: 0; width: 100%; z-index: 100;">
+        <div class="logo-container">
+            <img src="img/logo.jpg" alt="Company Logo">
+            <span class="company-name">Stallion Sports- Equestrian Equipment</span>
+        </div>        
+    </header>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#products">Products</a>
+        <a href="#receipt">Cart</a>
+        <a href="#contact">Contact</a>
+        <div id="cart-icon" style="position:fixed;top:80px;right:20px;background:#fff;padding:5px 10px;border-radius:5px;">
+            🛒 <span id="cart-count">0</span>
+        </div>
+    </nav>
+    <div class="hero" id="home">
+        <h1>Welcome to Stallion Sports</h1>
+        <p><bold><strong>Premium Equestrian Equipment & Accessories.</strong></bold></p>
+        <a href="services.html">Explore Services</a>
+        <a href="products.html">Explore Products</a>
+    </div>
+    <div class="contact" id="about">
+            <h2>About Stallion Sports</h2>
+            <p>Welcome to Stallion Sports, your trusted partner for premium horse riding equipment and accessories. We are dedicated to providing top-quality saddles, bridles, helmets, boots, and other equestrian essentials to ensure a safe and enjoyable riding experience. Our passion for horses and commitment to excellence drive us to source the best products for riders of all levels.</p>
+    </div><br>  
+    <div class="section" id="#products">
+        <h2>Our Products🚀🚀🎠</h2>
+        
+                
+    <div class="category-container">
+        <div class="main-category">
+            <h5>Saddles & Tack 🐎🛋️</h5>
+        </div>
+        <div class="slider-container">
+            <div class="slider" id="apparelSlider">
+                
+                <div class="box">
+                    <img src="img/english_saddle.png" alt="Saddles" class="product-img"><br><button style="background-color: darkblue; color: white;"onclick="addToCart('English Saddles 🐴', 5299, 'img/english_saddle.png')">Add to Cart</button>
+                    <p><strong>English Saddles 🐴</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+    
+                <div class="box">
+                    <img src="img/western_saddle.png" alt="Saddles" class="product-img"><br><button style="background-color: darkblue; color: white;"onclick="addToCart('Western Saddles 🤠🪑', 1200, 'img/western_saddle.png')">Add to Cart</button>
+                    <p><strong>Western Saddles 🤠🪑</strong><br><strong>Price: </strong>1200 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/endurance_saddle.png" alt="Saddles" class="product-img"><br><button style="background-color: darkblue; color: white;"onclick="addToCart('Endurance Saddles 🛋', 5180, 'img/endurance_saddle.png')">Add to Cart</button>
+                    <p><strong>Endurance Saddles 🛋</strong><br><strong>Price: </strong>5180 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/english_bridle.png" alt="Saddles" class="product-img"><br><button style="background-color: darkblue; color: white;"onclick="addToCart('English Bridle & Reins 🪢🧲', 499, 'img/english_bridle.png')">Add to Cart</button>
+                    <p><strong>English Bridle & Reins 🪢🧲</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/western_bridle.png" alt="Saddles" class="product-img"><br><button style="background-color: darkblue; color: white;"onclick="addToCart('Western Bridle & Reins 🪢🧲', 499, 'img/western_bridle.png')">Add to Cart</button>
+                    <p><strong>Western Bridle & Reins 🪢🧲</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/endurance_bridle.png" alt="Saddles" class="product-img"><br><button style="background-color: darkblue; color: white;"onclick="addToCart('Endurance Bridle & Reins 🪢🧲', 499, 'img/endurance_bridle.png')">Add to Cart</button>
+                    <p><strong>Endurance Bridle &Reins 🪢🧲</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/snaffle_bit.png" alt="Saddles" class="product-img"><br><button style="background-color: darkblue; color: white;"onclick="addToCart('Snaffle Bits 🛋', 499, 'img/snaffle_bit.png')">Add to Cart</button>
+                    <p><strong>Snaffle Bits 🛋</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <!-- ✅ Updated onclick values using image and product name -->
+<div class="box"> 
+  <img src="img/curb_bit.png" alt="Saddles" class="product-img"><br>
+  <button style="background-color: darkblue; color: white;" onclick="addToCart('Curb Bits 🛋', 5299, 'img/curb_bit.png')">Add to Cart</button>
+  <p><strong>Curb Bits 🛋</strong><br><strong>Price: </strong>5299 Rs.</p>
+</div>
+
+<div class="box">
+  <img src="img/bit_guards.png" alt="Saddles" class="product-img"><br>
+  <button style="background-color: darkblue; color: white;" onclick="addToCart('Bit Guard & Accessories 🛋', 5299, 'img/bit_guards.png')">Add to Cart</button>
+  <p><strong>Bit Guard & Accessories 🛋</strong><br><strong>Price: </strong>5299 Rs.</p>
+</div>
+
+<div class="box">
+  <img src="img/grith.png" alt="Saddles" class="product-img"><br>
+  <button style="background-color: darkblue; color: white;" onclick="addToCart('Horsestud Leather Grith 🛋', 1903, 'img/grith.png')">Add to Cart</button>
+  <p><strong>Horsestud Leather Grith 🛋</strong><br><strong>Price: </strong>1903 Rs.</p>
+</div>
+
+<div class="box">
+  <img src="img/crinch.png" alt="Saddles" class="product-img"><br>
+  <button style="background-color: darkblue; color: white;" onclick="addToCart('western Rinding Crinch 🛋', 5299, 'img/crinch.png')">Add to Cart</button>
+  <p><strong>western Rinding Crinch 🛋</strong><br><strong>Price: </strong>5299 Rs.</p>
+</div>
+
+<div class="box">
+  <img src="img/stirup.png" alt="Saddles" class="product-img"><br>
+  <button style="background-color: darkblue; color: white;" onclick="addToCart('EVTSCAN Stirrup Leathers', 2800, 'img/stirup.png')">Add to Cart</button>
+  <p><strong>EVTSCAN Stirrup Leathers, <br>1 Pair Lengthen Stainless Steel Buckle Horse Tool Accessories 50cm Black</strong><br><strong>Price: </strong>2800 Rs.</p>
+</div>
+
+<div class="box">
+  <img src="img/iron_stirup.png" alt="Saddles" class="product-img"><br>
+  <button style="background-color: darkblue; color: white;" onclick="addToCart('iron Stirup 🛋', 5299, 'img/iron_stirup.png')">Add to Cart</button>
+  <p><strong>iron Stirup 🛋</strong><br><strong>Price: </strong>5299 Rs.</p>
+</div>
+
+            </div>
+        </div>
+    </div>
+    
+        <div class="category-container">
+            <div class="main-category">
+                <h5>Horse Care Supplies 🧽🐴</h5>
+            </div>
+            <div class="slider-container">
+                <div class="slider" id="apparelSlider"><div class="box">
+                    <img src="img/grooming_kit.png" alt="Saddles" class="product-img"><br><button style="background-color: darkblue; color: white;"onclick="addToCart('Grooming Kits 🧰🧼', 2800, 'img/grooming_kit.png')">Add to Cart</button>
+                    <p><strong>Grooming Kits 🧰🧼</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/hoof_care.png" alt="Saddles" class="product-img"><br><button style="background-color: darkblue; color: white;"onclick="addToCart('Hoof Care Products 🦶🧴', 5299, 'img/hoof_care.png')">Add to Cart</button>
+                    <p><strong>Hoof Care Products 🦶🧴</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/coat.png" alt="Saddles" class="product-img"><br><button style="background-color: darkblue; color: white;"onclick="addToCart('Coat Conditioners & Shampoos 💧🧴', 2800, 'img/coat.png')">Add to Cart</button>
+                    <p><strong>Coat Conditioners & Shampoos 💧🧴</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/hoof.png" alt="Saddles" class="product-img"><br><button style="background-color: darkblue; color: white;"onclick="addToCart('Hoof Care Products 🦶🧴', 5299, 'img/hoof.png')">Add to Cart</button>
+                    <p><strong>Hoof Care Products 🦶🧴</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/rep.png" alt="Saddles" class="product-img"><br><button style="background-color: darkblue; color: white;"onclick="addToCart('Fly Sprays & Repellents 🦟🚫', 2800, 'img/rep.png')">Add to Cart</button>
+                    <p><strong>Fly Sprays & Repellents 🦟🚫</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/spray.png" alt="Saddles" class="product-img"><br><button style="background-color: darkblue; color: white;"onclick="addToCart('Fly Sprays & Repellents 🦟🚫', 5299, 'img/spray.png')">Add to Cart</button>
+                    <p><strong>Fly Sprays & Repellents 🦟🚫</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+            </div>
+        </div> 
+        </div>   
+        <div class="category-container">
+            <div class="main-category">
+                <h5>Feeding & Nutrition 🥕🍽️</h5>
+            </div>
+            <div class="slider-container">
+                <div class="slider" id="apparelSlider"><div class="box">
+                    <img src="img/bucket.png" alt="Saddles" class="product-img"><br><button style="background-color: darkblue; color: white;"onclick="addToCart('Feed Buckets & Tubs 🪣', 2800, 'img/bucket.png')">Add to Cart</button>
+                    <p><strong>Feed Buckets & Tubs 🪣</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/net.png" alt="Saddles" class="product-img"><br><button style="background-color: darkblue; color: white;"onclick="addToCart('Hay Nets & Bags 🧺🌾', 5299, 'img/net.png')">Add to Cart</button>
+                    <p><strong>Hay Nets & Bags 🧺🌾</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/supplements.png" alt="Saddles" class="product-img"><br><button style="background-color: darkblue; color: white;"onclick="addToCart('Supplements 💊🐴', 2800, 'img/supplements.png')">Add to Cart</button>
+                    <p><strong>Supplements 💊🐴</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/feeder.png" alt="Saddles" class="product-img"><br><button style="background-color: darkblue; color: white;"onclick="addToCart('Automatic Feeders ⏲️🛠️', 5299, 'img/feeder.png')">Add to Cart</button>
+                    <p><strong>Automatic Feeders ⏲️🛠️</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+            </div>
+        </div>    </div> 
+       <div class="category-container">
+            <div class="main-category">
+                <h5>Rider Apparel 🧍‍♀️👢</h5>
+            </div>
+            <div class="slider-container">
+                  <div class="slider" id="apparelSlider"><div class="box">
+                    <img src="img/groomig_kit.png" alt="Saddles" class="product-img"><br><button style="background-color: darkblue; color: white;"onclick="addToCart('Helmets ⛑️🏇', 2800, 'img/groomig_kit.png')">Add to Cart</button>
+                    <p><strong>Helmets ⛑️🏇</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/hoof_care.png" alt="Saddles" class="product-img"><br><button style="background-color: darkblue; color: white;"onclick="addToCart('Riding Boots 👢🖤', 5299, 'img/hoof_care.png')">Add to Cart</button>
+                    <p><strong>Riding Boots 👢🖤</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/coat.png" alt="Saddles" class="product-img"><br><button style="background-color: darkblue; color: white;"onclick="addToCart('Breeches & Jodhpurs 👖🧍‍♂️', 2800, 'img/coat.png')">Add to Cart</button>
+                    <p><strong>Breeches & Jodhpurs 👖🧍‍♂️</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/hoof.png" alt="Saddles" class="product-img"><br><button style="background-color: darkblue; color: white;"onclick="addToCart('Riding Gloves & Jackets 🧤🧥', 5299, 'img/hoof.png')">Add to Cart</button>
+                    <p><strong>Riding Gloves & Jackets 🧤🧥</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+            </div></div></div>
+            <div class="category-container">
+            <div class="main-category">
+                <h5>Stable Equipment 🛖🛠️</h5>
+            </div>
+            <div class="slider-container">
+                  <div class="slider" id="apparelSlider"><div class="box">
+                    <img src="img/groomig_kit.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Saddle Racks 🪵📦', 2800, 'img/groomig_kit.png')">Add to Cart</button>
+                    <p><strong>Saddle Racks 🪵📦</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/hoof_care.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Muck Buckets 🧼🚮', 5299, 'img/hoof_care.png')">Add to Cart</button>
+                    <p><strong>Muck Buckets 🧼🚮</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/coat.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Stall Mats 🧱🧽', 2800, 'img/coat.png')">Add to Cart</button>
+                    <p><strong>Stall Mats 🧱🧽</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/hoof.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Water Troughs 💧🛁', 5299, 'img/hoof.png')">Add to Cart</button>
+                    <p><strong>Water Troughs 💧🛁</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+            </div></div></div>
+            <div class="category-container">
+            <div class="main-category">
+                <h5>Horse Accessories 🎒🐴</h5>
+            </div>
+            <div class="slider-container">
+                  <div class="slider" id="apparelSlider"><div class="box">
+                    <img src="img/groomig_kit.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Halters & Lead Ropes 🪢🔗', 2800, 'img/groomig_kit.png')">Add to Cart</button>
+                    <p><strong>Halters & Lead Ropes 🪢🔗</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/hoof_care.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Blankets & Sheets 🛏️🧶', 5299, 'img/hoof_care.png')">Add to Cart</button>
+                    <p><strong>Blankets & Sheets 🛏️🧶</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/coat.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Fly Masks & Boots 🐝👟', 2800, 'img/coat.png')">Add to Cart</button>
+                    <p><strong>Fly Masks & Boots 🐝👟</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/hoof.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Travel Gear 🚚📦', 5299, 'img/hoof.png')">Add to Cart</button>
+                    <p><strong>Travel Gear 🚚📦</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/rep.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Fly Sprays & Repellents 🦟🚫', 2800, 'img/rep.png')">Add to Cart</button>
+                    <p><strong>Fly Sprays & Repellents 🦟🚫</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/spray.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Fly Sprays & Repellents 🦟🚫', 5299, 'img/spray.png')">Add to Cart</button>
+                    <p><strong>Fly Sprays & Repellents 🦟🚫</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+            </div></div></div>
+
+            <div class="category-container">
+            <div class="main-category">
+                <h5> First Aid & Health Essentials 🩹🧪</h5>
+            </div>
+            <div class="slider-container">
+                  <div class="slider" id="apparelSlider"><div class="box">
+                    <img src="img/groomig_kit.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Bandages & Wraps 🧻', 2800, 'img/groomig_kit.png')">Add to Cart</button>
+                    <p><strong>Bandages & Wraps 🧻</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/hoof_care.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Wound Ointments 💧', 5299, 'img/hoof_care.png')">Add to Cart</button>
+                    <p><strong>Wound Ointments 💧</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/coat.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Thermometers 🌡️', 2800, 'img/coat.png')">Add to Cart</button>
+                    <p><strong>Thermometers 🌡️</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/hoof.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Poultices & Liniments 🧴', 5299, 'img/hoof.png')">Add to Cart</button>
+                    <p><strong>Poultices & Liniments 🧴</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/rep.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Emergency Kits 🚨', 2800, 'img/rep.png')">Add to Cart</button>
+                    <p><strong>Emergency Kits 🚨</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+            </div></div></div>
+
+            <div class="category-container">
+            <div class="main-category">
+                <h5>Treats & Toys 🍬🎠</h5>
+            </div>
+            <div class="slider-container">
+                  <div class="slider" id="apparelSlider"><div class="box">
+                    <img src="img/groomig_kit.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Reward Treats 🍪', 2800, 'img/groomig_kit.png')">Add to Cart</button>
+                    <p><strong>Reward Treats 🍪</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/hoof_care.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Lick Blocks 🧊', 5299, 'img/hoof_care.png')">Add to Cart</button>
+                    <p><strong>Lick Blocks 🧊</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/coat.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Chew Toys 🦴', 2800, 'img/coat.png')">Add to Cart</button>
+                    <p><strong>Chew Toys 🦴</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/hoof.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Hanging Stall Toys 🧸', 5299, 'img/hoof.png')">Add to Cart</button>
+                    <p><strong>Hanging Stall Toys 🧸</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/rep.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Puzzle Feeders 🧩', 2800, 'img/rep.png')">Add to Cart</button>
+                    <p><strong>Puzzle Feeders 🧩</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+            </div>
+        </div>  </div>   
+       <div class="category-container">
+            <div class="main-category">
+                <h5>Reflective & Safety Gear 🌟🦺</h5>
+            </div>
+            <div class="slider-container">
+                  <div class="slider" id="apparelSlider"><div class="box">
+                    <img src="img/groomig_kit.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Reflective Leg Bands 🦵', 2800, 'img/groomig_kit.png')">Add to Cart</button>
+                    <p><strong>Reflective Leg Bands 🦵</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/hoof_care.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Hi-Viz Riding Sheets 🔆', 5299, 'img/hoof_care.png')">Add to Cart</button>
+                    <p><strong>Hi-Viz Riding Sheets 🔆</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/coat.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Safety Vests 🧥', 2800, 'img/coat.png')">Add to Cart</button>
+                    <p><strong>Safety Vests 🧥</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/hoof.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Reflective Halters 💡', 5299, 'img/hoof.png')">Add to Cart</button>
+                    <p><strong>Reflective Halters 💡</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/rep.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Tail Lights 🚦', 2800, 'img/rep.png')">Add to Cart</button>
+                    <p><strong>Tail Lights 🚦</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+            </div>
+        </div>  </div>   
+       
+       <div class="category-container">
+            <div class="main-category">
+                <h5>Training Aids 🏋️🐎</h5>
+            </div>
+            <div class="slider-container">
+                  <div class="slider" id="apparelSlider"><div class="box">
+                    <img src="img/groomig_kit.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Lunge Lines 🧵', 2800, 'img/groomig_kit.png')">Add to Cart</button>
+                    <p><strong>Lunge Lines 🧵</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/hoof_care.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Lunge Whips 🐍', 5299, 'img/hoof_care.png')">Add to Cart</button>
+                    <p><strong>Lunge Whips 🐍</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/coat.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Side Reins 🔗', 2800, 'img/coat.png')">Add to Cart</button>
+                    <p><strong>Side Reins 🔗</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/hoof.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Cavessons 🐴', 5299, 'img/hoof.png')">Add to Cart</button>
+                    <p><strong>Cavessons 🐴</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/rep.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Training Surcingles 🎗️', 2800, 'img/rep.png')">Add to Cart</button>
+                    <p><strong>Training Surcingles 🎗️</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+            </div>
+        </div>  </div>   
+       
+       <div class="category-container">
+            <div class="main-category">
+                <h5>Show Preparation Items ✨🏅</h5>
+            </div>
+            <div class="slider-container">
+                  <div class="slider" id="apparelSlider"><div class="box">
+                    <img src="img/groomig_kit.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Show Halters 🎗', 2800, 'img/groomig_kit.png')">Add to Cart</button>
+                    <p><strong>Show Halters 🎗</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/hoof_care.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Braiding Kits 🪢', 5299, 'img/hoof_care.png')">Add to Cart</button>
+                    <p><strong>Braiding Kits 🪢</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/coat.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Shine Sprays 💎', 2800, 'img/coat.png')">Add to Cart</button>
+                    <p><strong>Shine Sprays 💎</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/hoof.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Whitening Shampoos 🧼', 5299, 'img/hoof.png')">Add to Cart</button>
+                    <p><strong>Whitening Shampoos 🧼</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/rep.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Hoof Polish 🧽', 2800, 'img/rep.png')">Add to Cart</button>
+                    <p><strong>Hoof Polish 🧽</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+            </div>
+        </div>  </div>   
+       
+       <div class="category-container">
+            <div class="main-category">
+                <h5>Ear Bonnets & Fly Gear 🐝🧢</h5>
+            </div>
+            <div class="slider-container">
+                  <div class="slider" id="apparelSlider"><div class="box">
+                    <img src="img/groomig_kit.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Crochet Ear Bonnets 🧶', 2800, 'img/groomig_kit.png')">Add to Cart</button>
+                    <p><strong>Crochet Ear Bonnets 🧶</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/hoof_care.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Soundproof Bonnets 🎧', 5299, 'img/hoof_care.png')">Add to Cart</button>
+                    <p><strong>Soundproof Bonnets 🎧</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/coat.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Full Fly Masks 🕸️', 2800, 'img/coat.png')">Add to Cart</button>
+                    <p><strong>Full Fly Masks 🕸️</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/hoof.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Nose Nets 🕷️', 5299, 'img/hoof.png')">Add to Cart</button>
+                    <p><strong>Nose Nets 🕷️</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/rep.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Fly Veils 👒', 2800, 'img/rep.png')">Add to Cart</button>
+                    <p><strong>Fly Veils 👒</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+            </div>
+        </div>  </div> 
+        <div class="category-container">
+            <div class="main-category">
+                <h5>Cooling & Recovery Gear ❄️🧊</h5>
+            </div>
+            <div class="slider-container">
+                  <div class="slider" id="apparelSlider"><div class="box">
+                    <img src="img/groomig_kit.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Ice Boots 🥾', 2800, 'img/groomig_kit.png')">Add to Cart</button>
+                    <p><strong>Ice Boots 🥾</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/hoof_care.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Cooling Wraps 🩹❄️', 5299, 'img/hoof_care.png')">Add to Cart</button>
+                    <p><strong>Cooling Wraps 🩹❄️</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/coat.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Electrolyte Gels 🧃', 2800, 'img/coat.png')">Add to Cart</button>
+                    <p><strong>Electrolyte Gels 🧃</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/hoof.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Therapy Blankets 🛌', 5299, 'img/hoof.png')">Add to Cart</button>
+                    <p><strong>Therapy Blankets 🛌</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/rep.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Cooling Leg Gel 🌬️', 2800, 'img/rep.png')">Add to Cart</button>
+                    <p><strong>Cooling Leg Gel 🌬️</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+            </div>
+        </div>  </div>   
+       
+       
+        <div class="category-container">
+            <div class="main-category">
+                <h5>Horse Identification & Labels 🏷️🔖</h5>
+            </div>
+            <div class="slider-container">
+                  <div class="slider" id="apparelSlider"><div class="box">
+                    <img src="img/groomig_kit.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Name Tags 🏷️', 2800, 'img/groomig_kit.png')">Add to Cart</button>
+                    <p><strong>Name Tags 🏷️</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/hoof_care.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Engraved Halter Plates 🔩', 5299, 'img/hoof_care.png')">Add to Cart</button>
+                    <p><strong>Engraved Halter Plates 🔩</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/coat.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Stall Plaques 🪧', 2800, 'img/coat.png')">Add to Cart</button>
+                    <p><strong>Stall Plaques 🪧</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/hoof.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Travel Tags ✈️', 5299, 'img/hoof.png')">Add to Cart</button>
+                    <p><strong>Travel Tags ✈️</strong><br><strong>Price: </strong>5299 Rs.</p>
+                </div>
+                <div class="box">
+                    <img src="img/rep.png" alt="Saddles" class="product-img"><button style="background-color: darkblue; color: white;"onclick="addToCart('Custom Nameplates 🪪', 2800, 'img/rep.png')">Add to Cart</button>
+                    <p><strong>Custom Nameplates 🪪</strong><br><strong>Price: </strong>2800 Rs.</p>
+                </div>
+            </div>
+        </div>  </div>   
+       <br>
+       
+       
+       
+       
+    
+    
+        
+    </div></div><br>
+     
+    <div class="section" id="services">
+        <h2>Our Services🏢👩‍🏭</h2>
+        <div class="category-container">
+            <div class="main-category">
+                <h5>Saddle Fitting & Repairs 🔧🪡</h5>
+            </div>
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="box">
+                        <img src="img/training1.jpg" alt="Basic Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Custom Fit Check 📏', 10000, 'img/training1.jpg')">Add to Cart</button>
+                        <p><strong>Custom Fit Check 📏</strong><br><strong>Price: </strong>10000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/training2.jpg" alt="Advanced Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Leather Repair 🪚', 15000, 'img/training2.jpg')">Add to Cart</button>
+                        <p><strong>Leather Repair 🪚</strong><br><strong>Price: </strong>15000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/grooming.jpg" alt="Grooming" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Padding Replacement 🛋️', 5000, 'img/grooming.jpg')">Add to Cart</button>
+                        <p><strong>Padding Replacement 🛋️</strong><br><strong>Price: </strong>5000 Rs/month</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="category-container">
+            <div class="main-category">
+                <h5>Horse Training & Lessons 🧠🏇</h5>
+            </div>
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="box">
+                        <img src="img/training1.jpg" alt="Basic Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Riding Lessons 👩‍🏫', 10000, 'img/training1.jpg')">Add to Cart</button>
+                        <p><strong>Riding Lessons 👩‍🏫</strong><br><strong>Price: </strong>10000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/training2.jpg" alt="Advanced Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Behavioral Training 🧘‍♂️', 15000, 'img/training2.jpg')">Add to Cart</button>
+                        <p><strong>Behavioral Training 🧘‍♂️</strong><br><strong>Price: </strong>15000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/grooming.jpg" alt="Grooming" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Competition Prep 🏆', 5000, 'img/grooming.jpg')">Add to Cart</button>
+                        <p><strong>Competition Prep 🏆</strong><br><strong>Price: </strong>5000 Rs/month</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="category-container">
+            <div class="main-category">
+                <h5>Veterinary Assistance 🩺🐾</h5>
+            </div>
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="box">
+                        <img src="img/training1.jpg" alt="Basic Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Health Checkups 📅', 10000, 'img/training1.jpg')">Add to Cart</button>
+                        <p><strong>Health Checkups 📅</strong><br><strong>Price: </strong>10000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/training2.jpg" alt="Advanced Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Emergency Visits 🚑', 15000, 'img/training2.jpg')">Add to Cart</button>
+                        <p><strong>Emergency Visits 🚑</strong><br><strong>Price: </strong>15000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/grooming.jpg" alt="Grooming" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Vaccination 💉', 5000, 'img/grooming.jpg')">Add to Cart</button>
+                        <p><strong>Vaccination 💉</strong><br><strong>Price: </strong>5000 Rs/month</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+<div class="category-container">
+            <div class="main-category">
+                <h5>Horse Boarding & Stable Rental 🏡🐴</h5>
+            </div>
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="box">
+                        <img src="img/training1.jpg" alt="Basic Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Full Boarding 🛏️🌿', 10000, 'img/training1.jpg')">Add to Cart</button>
+                        <p><strong>Full Boarding 🛏️🌿</strong><br><strong>Price: </strong>10000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/training2.jpg" alt="Advanced Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Pasture Turnout 🌳', 15000, 'img/training2.jpg')">Add to Cart</button>
+                        <p><strong>Pasture Turnout 🌳</strong><br><strong>Price: </strong>15000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/grooming.jpg" alt="Grooming" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('DIY Boarding 🛠️', 5000, 'img/grooming.jpg')">Add to Cart</button>
+                        <p><strong>DIY Boarding 🛠️</strong><br><strong>Price: </strong>5000 Rs/month</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+<div class="category-container">
+            <div class="main-category">
+                <h5>Horse Training & Lessons 🧠🏇</h5>
+            </div>
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="box">
+                        <img src="img/training1.jpg" alt="Basic Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Riding Lessons 👩‍🏫', 10000, 'img/training1.jpg')">Add to Cart</button>
+                        <p><strong>Riding Lessons 👩‍🏫</strong><br><strong>Price: </strong>10000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/training2.jpg" alt="Advanced Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Behavioral Training 🧘‍♂️', 15000, 'img/training2.jpg')">Add to Cart</button>
+                        <p><strong>Behavioral Training 🧘‍♂️</strong><br><strong>Price: </strong>15000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/grooming.jpg" alt="Grooming" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Competition Prep 🏆', 5000, 'img/grooming.jpg')">Add to Cart</button>
+                        <p><strong>Competition Prep 🏆</strong><br><strong>Price: </strong>5000 Rs/month</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+<div class="category-container">
+            <div class="main-category">
+                <h5>Farrier Services 🦶🔨</h5>
+            </div>
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="box">
+                        <img src="img/training1.jpg" alt="Basic Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Hoof Trimming ✂️', 10000, 'img/training1.jpg')">Add to Cart</button>
+                        <p><strong>Hoof Trimming ✂️</strong><br><strong>Price: </strong>10000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/training2.jpg" alt="Advanced Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Shoeing 👞', 15000, 'img/training2.jpg')">Add to Cart</button>
+                        <p><strong>Shoeing 👞</strong><br><strong>Price: </strong>15000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/grooming.jpg" alt="Grooming" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Hoof Health Advice 🩻', 5000, 'img/grooming.jpg')">Add to Cart</button>
+                        <p><strong>Hoof Health Advice 🩻</strong><br><strong>Price: </strong>5000 Rs/month</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+<div class="category-container">
+            <div class="main-category">
+                <h5>Grooming Services 💈🧖</h5>
+            </div>
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="box">
+                        <img src="img/training1.jpg" alt="Basic Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Riding Lessons 👩‍🏫', 10000, 'img/training1.jpg')">Add to Cart</button>
+                        <p><strong>Full Groom 🧽</strong><br><strong>Price: </strong>10000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/training2.jpg" alt="Advanced Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Behavioral Training 🧘‍♂️', 15000, 'img/training2.jpg')">Add to Cart</button>
+                        <p><strong>Mane/Tail Styling 💇‍♂️</strong><br><strong>Price: </strong>15000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/grooming.jpg" alt="Grooming" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Competition Prep 🏆', 5000, 'img/grooming.jpg')">Add to Cart</button>
+                        <p><strong>Bathing 🛁</strong><br><strong>Price: </strong>5000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/training2.jpg" alt="Advanced Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Behavioral Training 🧘‍♂️', 15000, 'img/training2.jpg')">Add to Cart</button>
+                        <p><strong>Shedding Help 🍂</strong><br><strong>Price: </strong>15000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/grooming.jpg" alt="Grooming" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Competition Prep 🏆', 5000, 'img/grooming.jpg')">Add to Cart</button>
+                        <p><strong>Sheath Cleaning 🧼</strong><br><strong>Price: </strong>5000 Rs/month</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+v<div class="category-container">
+            <div class="main-category">
+                <h5>Tack Cleaning & Care 🪣🧴</h5>
+            </div>
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="box">
+                        <img src="img/training1.jpg" alt="Basic Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Riding Lessons 👩‍🏫', 10000, 'img/training1.jpg')">Add to Cart</button>
+                        <p><strong>Leather Conditioning 🐂🧼</strong><br><strong>Price: </strong>10000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/training2.jpg" alt="Advanced Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Behavioral Training 🧘‍♂️', 15000, 'img/training2.jpg')">Add to Cart</button>
+                        <p><strong>Deep Cleaning 🧽</strong><br><strong>Price: </strong>15000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/grooming.jpg" alt="Grooming" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Competition Prep 🏆', 5000, 'img/grooming.jpg')">Add to Cart</button>
+                        <p><strong>Mold Removal 🦠</strong><br><strong>Price: </strong>5000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/training2.jpg" alt="Advanced Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Behavioral Training 🧘‍♂️', 15000, 'img/training2.jpg')">Add to Cart</button>
+                        <p><strong>Stitch Repairs 🪡</strong><br><strong>Price: </strong>15000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/grooming.jpg" alt="Grooming" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Competition Prep 🏆', 5000, 'img/grooming.jpg')">Add to Cart</button>
+                        <p><strong>Tack Polishing 🪞</strong><br><strong>Price: </strong>5000 Rs/month</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+<div class="category-container">
+            <div class="main-category">
+                <h5>Show Preparation Help 🏆✨</h5>
+            </div>
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="box">
+                        <img src="img/training1.jpg" alt="Basic Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Pre-show Grooming 👔', 10000, 'img/training1.jpg')">Add to Cart</button>
+                        <p><strong>Pre-show Grooming 👔</strong><br><strong>Price: </strong>10000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/training2.jpg" alt="Advanced Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Braiding & Clipping ✂️', 15000, 'img/training2.jpg')">Add to Cart</button>
+                        <p><strong>Braiding & Clipping ✂️</strong><br><strong>Price: </strong>15000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/grooming.jpg" alt="Grooming" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Travel Packing 🎒', 5000, 'img/grooming.jpg')">Add to Cart</button>
+                        <p><strong>Travel Packing 🎒</strong><br><strong>Price: </strong>5000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/grooming.jpg" alt="Grooming" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Tack Check 🧰', 5000, 'img/grooming.jpg')">Add to Cart</button>
+                        <p><strong>Tack Check 🧰</strong><br><strong>Price: </strong>5000 Rs/month</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+<div class="category-container">
+            <div class="main-category">
+                <h5>Transport Services 🚚🐎</h5>
+            </div>
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="box">
+                        <img src="img/training1.jpg" alt="Basic Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Event Transport 🛻', 10000, 'img/training1.jpg')">Add to Cart</button>
+                        <p><strong>Event Transport 🛻</strong><br><strong>Price: </strong>10000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/training2.jpg" alt="Advanced Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Long-Distance Travel 🚛', 15000, 'img/training2.jpg')">Add to Cart</button>
+                        <p><strong>Long-Distance Travel 🚛</strong><br><strong>Price: </strong>15000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/grooming.jpg" alt="Grooming" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Emergency Hauling 🚨', 5000, 'img/grooming.jpg')">Add to Cart</button>
+                        <p><strong>Emergency Hauling 🚨</strong><br><strong>Price: </strong>5000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/grooming.jpg" alt="Grooming" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Paperwork & Licensing 📑', 5000, 'img/grooming.jpg')">Add to Cart</button>
+                        <p><strong>Paperwork & Licensing 📑</strong><br><strong>Price: </strong>5000 Rs/month</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+<div class="category-container">
+            <div class="main-category">
+                <h5>Clipping & Trimming ✂️🐎</h5>
+            </div>
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="box">
+                        <img src="img/training1.jpg" alt="Basic Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Body Clipping 🐎✂️', 10000, 'img/training1.jpg')">Add to Cart</button>
+                        <p><strong>Body Clipping 🐎✂️</strong><br><strong>Price: </strong>10000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/grooming.jpg" alt="Grooming" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Trace & Hunter Clips 📏🌲', 5000, 'img/grooming.jpg')">Add to Cart</button>
+                        <p><strong>Trace & Hunter Clips 📏🌲</strong><br><strong>Price: </strong>5000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/training2.jpg" alt="Advanced Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Bridle Path Trim 🪒', 15000, 'img/training2.jpg')">Add to Cart</button>
+                        <p><strong>Bridle Path Trim 🪒</strong><br><strong>Price: </strong>15000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/grooming.jpg" alt="Grooming" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Facial/Fetlock Trim 🧔🐴', 5000, 'img/grooming.jpg')">Add to Cart</button>
+                        <p><strong>Facial/Fetlock Trim 🧔🐴</strong><br><strong>Price: </strong>5000 Rs/month</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="category-container">
+            <div class="main-category">
+                <h5>Nutrition Consulting 🥗🧠</h5>
+            </div>
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="box">
+                        <img src="img/training1.jpg" alt="Basic Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Custom Diet Planning 📊', 10000, 'img/training1.jpg')">Add to Cart</button>
+                        <p><strong>Custom Diet Planning 📊</strong><br><strong>Price: </strong>10000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/grooming.jpg" alt="Grooming" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Supplement Guidance 💊', 5000, 'img/grooming.jpg')">Add to Cart</button>
+                        <p><strong>Supplement Guidance 💊</strong><br><strong>Price: </strong>5000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/training2.jpg" alt="Advanced Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Schedule Setup 🕒', 15000, 'img/training2.jpg')">Add to Cart</button>
+                        <p><strong>Schedule Setup 🕒</strong><br><strong>Price: </strong>15000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/grooming.jpg" alt="Grooming" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Allergy Adjustments 🚫🌾', 5000, 'img/grooming.jpg')">Add to Cart</button>
+                        <p><strong>Allergy Adjustments 🚫🌾</strong><br><strong>Price: </strong>5000 Rs/month</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="category-container">
+            <div class="main-category">
+                <h5>Customization Services 🎨🎁</h5>
+            </div>
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="box">
+                        <img src="img/training1.jpg" alt="Basic Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Monograms & Tags 🧵', 10000, 'img/training1.jpg')">Add to Cart</button>
+                        <p><strong>Monograms & Tags 🧵</strong><br><strong>Price: </strong>10000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/grooming.jpg" alt="Grooming" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Custom Pads & Sheets 🧵🛏️', 5000, 'img/grooming.jpg')">Add to Cart</button>
+                        <p><strong>Custom Pads & Sheets 🧵🛏️</strong><br><strong>Price: </strong>5000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/training2.jpg" alt="Advanced Training" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Personalized Gear Bags 🎒', 15000, 'img/training2.jpg')">Add to Cart</button>
+                        <p><strong>Personalized Gear Bags 🎒</strong><br><strong>Price: </strong>15000 Rs/month</p>
+                    </div>
+                    <div class="box">
+                        <img src="img/grooming.jpg" alt="Grooming" class="product-img"><br>
+                        <button style="background-color: darkblue; color: white;" onclick="addToCart('Engraving 🖋️', 5000, 'img/grooming.jpg')">Add to Cart</button>
+                        <p><strong>Engraving 🖋️</strong><br><strong>Price: </strong>5000 Rs/month</p>
+                    </div>
+                </div>
+            </div>
+        </div></div>
+
+  <br>
+
+    
+<div id="receipt" class="contact">
+  <h3>🧾 Your Cart 📃</h3>
+  <div id="cart-empty-msg">Your cart is empty.</div>
+
+  <table id="cart-items">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Qty</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody id="cart-body">
+      <!-- JS will insert <tr> rows here -->
+    </tbody>
+  </table>
+
+  <div id="cart-total"><strong>Total:</strong> ₹0</div>
+</div>
+
+
+
+<br>
+    <div id="contact" class="contact">
+        <h2>Contact Us⌚⏳⏲️</h2>
+        <p>
+            <a href="tel:+918303530386"><i class="fas fa-phone"></i> +91 8303530386</a>
+            <a href="https://wa.me/918303530386" target="_blank"><i class="fab fa-whatsapp" style="color: #25D366;"></i> WhatsApp</a>
+            <a href="https://www.facebook.com/StallionSports" target="_blank"><i class="fab fa-facebook" style="color: #1877F2;"></i> Facebook</a>
+       
+        </p>
+        <form id="contactForm" action="contact.php" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <br>
+            <button type="submit">Send Message</button>
+        </form>
+        <p id="responseMessage"></p>        
+    </div>    
+    <p id="responseMessage"></p>
+    <div class="footer">&copy; 2025 Stallion Sports | All Rights Reserved</div>
+    </body>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Check current cart contents
+    const currentCart = JSON.parse(localStorage.getItem("cart"));
+    console.log("Current Cart:", currentCart); // Debugging line
+
+    // Initialize the cart if it doesn't exist
+    if (!currentCart) {
+        localStorage.setItem("cart", JSON.stringify([]));
+    }
+    
+    updateCartCount(); // Update cart count on page load
+    loadCartToReceipt(); // Load cart items to receipt
+});
+
+function addToCart(name, price, image) {
+    // Ensure name and price are valid
+    if (!name || !price || isNaN(price)) return;
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // Check if the item already exists in the cart
+    let item = cart.find(i => i.name === name);
+    if (item) {
+        item.quantity += 1; // Increment quantity if item exists
+    } else {
+        // Add new item to the cart
+        cart.push({ name, price: parseFloat(price), image, quantity: 1 });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart)); // Update local storage
+    updateCartCount(); // Update cart count
+    loadCartToReceipt(); // Load cart items to receipt
+}
+
+function removeFromCart(name) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart = cart.filter(item => item.name !== name); // Remove item by name
+    localStorage.setItem("cart", JSON.stringify(cart)); // Update local storage
+    updateCartCount(); // Update cart count
+    loadCartToReceipt(); // Load cart items to receipt
+}
+
+function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0); // Calculate total items
+    const cartCount = document.getElementById("cart-count");
+    if (cartCount) cartCount.textContent = totalItems; // Update cart count display
+}
+
+function loadCartToReceipt() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const tbody = document.getElementById("cart-body"); // changed to tbody
+    const totalBox = document.getElementById("cart-total");
+    const emptyMsg = document.getElementById("cart-empty-msg");
+
+    if (!tbody || !totalBox || !emptyMsg) return;
+
+    tbody.innerHTML = ""; // Clear previous cart rows
+
+    if (cart.length === 0) {
+        emptyMsg.style.display = "block";
+        totalBox.innerHTML = "<strong>Total:</strong> ₹0";
+        return;
+    }
+
+    emptyMsg.style.display = "none";
+    let total = 0;
+
+    cart.forEach(item => {
+        if (item && item.name && item.price) {
+            const quantity = parseInt(item.quantity);
+            const price = parseFloat(item.price);
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td><strong>${item.name}</strong></td>
+                <td>${quantity}</td>
+                <td>₹${(quantity * price).toFixed(2)} 
+                    <br><button onclick="removeFromCart('${item.name}')">🗑️</button>
+                </td>
+            `;
+
+            tbody.appendChild(row);
+            total += quantity * price;
+        }
+    });
+
+    totalBox.innerHTML = `<strong>Total:</strong> ₹${total.toFixed(2)}`;
+}
+
+
+
+
+
+
+
+</script></html>
