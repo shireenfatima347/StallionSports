@@ -6,6 +6,13 @@
     <title>Stallion Sports - Equestrian Equipment</title>
     <!-- Removed the redundant <script src="cart.js"></script> as the JS is embedded below -->
     <style>
+  #searchInput:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0,123,255,0.5);
+  }
+
+
         #receipt {
   max-width: 360px;
   background: white;
@@ -485,7 +492,10 @@
     </div><br>  
     <div class="section" id="#products">
         <h2>Our Products🚀🚀🎠</h2>
-        
+        <div class="search-container" style="text-align: center; margin: 30px 0;">
+  <input type="text" id="searchInput" placeholder="Search Products..." style="padding: 10px; width: 300px; border-radius: 10px;">
+</div>
+
                 
     <div class="category-container">
         <div class="main-category">
@@ -1425,6 +1435,16 @@ function loadCartToReceipt() {
     totalBox.innerHTML = `<strong>Total:</strong> ₹${total.toFixed(2)}`;
 }
 
+
+  document.getElementById('searchInput').addEventListener('input', function () {
+    const value = this.value.toLowerCase();
+    const boxes = document.querySelectorAll('.slider .box');
+
+    boxes.forEach(function (box) {
+      const text = box.textContent.toLowerCase();
+      box.style.display = text.includes(value) ? 'block' : 'none';
+    });
+  });
 
 
 
